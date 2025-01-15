@@ -10,7 +10,7 @@ class JwtMiddleware
 {
     public function handle($request, Closure $next)
     {
-        if (!$this->isAuth($request))
+        if (!($this->isAuth($request) || $this->isDoc($request)))
             try {
                 $user = JWTAuth::parseToken()->authenticate();
             } catch (JWTException $e) {
@@ -27,5 +27,11 @@ class JwtMiddleware
             env('APP_URL') ,
             env('APP_URL') . '/api/login',
         ]);
+    }
+
+    private function isDoc($request)
+    {
+        $arr = explode('/', $request->url());
+        return count($arr) > 3 && $arr[3] == 'docs';
     }
 }

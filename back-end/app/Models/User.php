@@ -2,6 +2,9 @@
 
 namespace App\Models;
 
+use App\Models\Team\Team;
+use App\Models\Team\TeamsUsers;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Tymon\JWTAuth\Contracts\JWTSubject;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -45,5 +48,14 @@ class User extends Authenticatable implements JWTSubject
     public function getJWTCustomClaims()
     {
         return [];
+    }
+
+
+    /**
+     * @return BelongsToMany
+     */
+    public function teams(): BelongsToMany
+    {
+        return $this->belongsToMany(Team::class, TeamsUsers::class, 'T_UserId', 'T_TeamId');
     }
 }

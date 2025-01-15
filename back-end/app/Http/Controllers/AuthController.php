@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 
+use App\Http\Resources\UserResource;
 use App\Models\User;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -23,7 +24,45 @@ class AuthController extends Controller
         $this->middleware('auth:api', ['except' => ['login', 'register']]);
     }
 
-    // User registration
+    /**
+     * @OA\Post(
+     *     path="/api/register",
+     *     summary="User registration",
+     *     description="Register a new user and return user details with token.",
+     *     operationId="registerUser",
+     *     tags={"Authentication"},
+     *     @OA\RequestBody(
+     *         required=true,
+     *         @OA\JsonContent(
+     *             required={"name", "lastName", "email", "password"},
+     *             @OA\Property(property="name", type="string", example="Mostafa"),
+     *             @OA\Property(property="lastName", type="string", example="Rahmati"),
+     *             @OA\Property(property="email", type="string", format="email", example="mm.rahmati94@gmail.com"),
+     *             @OA\Property(property="password", type="string", format="password", example="Isna1994")
+     *         )
+     *     ),
+     *     @OA\Response(
+     *         response=201,
+     *         description="Successful registration",
+     *         @OA\JsonContent(
+     *             @OA\Property(property="user", type="object",
+     *                 @OA\Property(property="id", type="integer", example=2),
+     *                 @OA\Property(property="name", type="string", example="Mostafa"),
+     *                 @OA\Property(property="lastName", type="string", example="Rahmati"),
+     *                 @OA\Property(property="email", type="string", example="mm.rahmati94@gmail.com")
+     *             ),
+     *             @OA\Property(property="token", type="string", example="eyJhbGciOiJIUzI1NiJ9.newUserToken")
+     *         )
+     *     ),
+     *     @OA\Response(
+     *         response=400,
+     *         description="Validation error",
+     *         @OA\JsonContent(
+     *             @OA\Property(property="error", type="string", example="Validation failed")
+     *         )
+     *     )
+     * )
+     */
     public function register(Request $request)
     {
         $validator = Validator::make($request->all(), [
@@ -33,7 +72,7 @@ class AuthController extends Controller
             'password' => 'required|string|min:6',
         ]);
 
-        if($validator->fails()){
+        if ($validator->fails()) {
             return response()->json($validator->errors()->toJson(), 400);
         }
 
@@ -46,13 +85,55 @@ class AuthController extends Controller
 
         $token = JWTAuth::fromUser($user);
 
-        return response()->json(compact('user','token'), 201);
+        return response()->json([
+            'user' => new UserResource($user),
+            'token' => $token
+        ], 201);
     }
 
     /**
-     * Get a JWT via given credentials.
-     *
-     * @return JsonResponse
+     * @OA\Info(
+     *     title="WorkHive API",
+     *     version="1.0.0",
+     *     description="API documentation for WorkHive application."
+     * ),
+     * @OA\Post(
+     *     path="/api/login",
+     *     summary="User login",
+     *     description="Authenticate user and return user details with token.",
+     *     operationId="loginUser",
+     *     tags={"Authentication"},
+     *     @OA\RequestBody(
+     *         required=true,
+     *         @OA\JsonContent(
+     *             required={"email", "password"},
+     *             @OA\Property(property="email", type="string", format="email", example="mm.rahmati94@gmail.com"),
+     *             @OA\Property(property="password", type="string", format="password", example="12345safas@")
+     *         )
+     *     ),
+     *     @OA\Response(
+     *         response=200,
+     *         description="Successful login",
+     *         @OA\JsonContent(
+     *             @OA\Property(property="user", type="object",
+     *                 @OA\Property(property="id", type="integer", example=1),
+     *                 @OA\Property(property="name", type="string", example="Mostafa"),
+     *                 @OA\Property(property="lastName", type="string", example="Rahmati"),
+     *                 @OA\Property(property="email", type="string", example="mm.rahmati94@gmail.com"),
+     *                 @OA\Property(property="password", type="string", example="$2y$12$syetgnrt0oyYWs90V9h11OlwwI72OdbzHIZPn43pJBdz912QRBCUm"),
+     *                 @OA\Property(property="profileImg", type="string", nullable=true, example="http://base.com/route/1212.png"),
+     *             ),
+     *             @OA\Property(property="token", type="string", example="eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vd29ya2hpdmUubG9jYWwvYXBpL2xvZ2luIiwiaWF0IjoxNzM2ODY3NTQyLCJleHAiOjE3MzY4NzExNDIsIm5iZiI6MTczNjg2NzU0MiwianRpIjoidldVcDBTanNERDltQ1ladiIsInN1YiI6IjEiLCJwcnYiOiIyM2JkNWM4OTQ5ZjYwMGFkYjM5ZTcwMWM0MDA4NzJkYjdhNTk3NmY3In0.zoZ7zoUX4sWIasOPthPhF0UVvsCt-iq4lWYo8buQB3c")
+     *         )
+     *     ),
+     *     @OA\Response(
+     *         response=401,
+     *         description="Invalid credentials",
+     *         @OA\JsonContent(
+     *             @OA\Property(property="error", type="string", example="Unauthorized")
+     *         )
+     *     )
+     * )
      */
     public function login(Request $request)
     {
@@ -72,7 +153,10 @@ class AuthController extends Controller
 
         $token = JWTAuth::fromUser($user);
 
-        return response()->json(compact('user','token'), 201);
+        return response()->json([
+            'user' => new UserResource($user),
+            'token' => $token
+        ], 201);
     }
 
     /**
@@ -110,7 +194,7 @@ class AuthController extends Controller
     /**
      * Get the token array structure.
      *
-     * @param  string $token
+     * @param string $token
      *
      * @return JsonResponse
      */
