@@ -3,11 +3,10 @@
 namespace App\Http\Controllers\Project;
 
 use App\Http\Resources\Project\ProjectShowResource;
-use App\Models\Project;
+use App\Models\Project\Project;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Validator;
-use TheSeer\Tokenizer\Exception;
 
 class ProjectController extends Controller
 {

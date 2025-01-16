@@ -26,7 +26,7 @@ class UserController extends Controller
      *     path="/users/{id}",
      *     summary="Update user information",
      *     description="Updates the specified user's name, last name, and email.",
-     *     tags={"User"},
+     *     tags={"Users"},
      *     @OA\Parameter(
      *         name="id",
      *         in="path",

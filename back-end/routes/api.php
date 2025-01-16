@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\Task\TaskController;
 use App\Http\Controllers\Team\TeamController;
 use App\Http\Controllers\Team\TeamUserController;
 use App\Http\Controllers\User\UserController;
@@ -26,5 +27,6 @@ Route::post('/users/{user_id}/teams', [TeamUserController::class, 'showUserTeams
 Route::delete('/teams/users', [TeamUserController::class, 'destroy']);
 
 Route::resource('teams', TeamController::class);
+Route::resource('tasks', TaskController::class);
 Route::put('/users/{id}', [UserController::class, 'update']);
 
