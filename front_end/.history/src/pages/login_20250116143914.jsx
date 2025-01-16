@@ -3,7 +3,6 @@ import { useForm } from 'react-hook-form';
 import { login } from '../api/auth';
 import Cookies from 'js-cookie';
 import logoImage from '../assets/logo.png';
-import { useNavigate } from 'react-router-dom';
 
 const Login = () => {
   const {
@@ -12,14 +11,13 @@ const Login = () => {
     setError,
     formState: { errors },
   } = useForm();
-  const navigate = useNavigate();
+
   const onSubmit = async (data) => {
     try {
       const response = await login(data);
       if (response.token) {
-      Cookies.set('bearer', response.token, { secure: true, sameSite: 'Strict' });
-      alert(`خوش آمدید ${response.user.name} ${response.user.lastName}`);
-      navigate('/');
+        Cookies.set('jwt', response.token, { secure: true, sameSite: 'Strict' });
+        alert(`خوش آمدید ${response.user.name} ${response.user.lastName}`);
       } else {
         throw new Error('ورود ناموفق بود');
       }
@@ -42,7 +40,9 @@ const Login = () => {
           </div>
         </div>
 
+        {/* Login Form */}
         <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
+          {/* Email Field */}
           <div>
             <label
               htmlFor="email"
@@ -111,7 +111,7 @@ const Login = () => {
 
           <button
             type="submit"
-            className="w-full bg-gradient-to-r from-blue-500 to-blue-600 text-white py-3 px-4 rounded-xl font-medium shadow-lg hover:shadow-xl focus:ring-2 focus:ring-blue-400 focus:outline-none"
+            className="w-full bg-gradient-to-r from-blue-500 to-blue-600 text-white py-3 px-4 rounded-none font-semibold shadow-lg hover:shadow-xl focus:ring-2 focus:ring-blue-400 focus:outline-none"
           >
             ورود
           </button>
