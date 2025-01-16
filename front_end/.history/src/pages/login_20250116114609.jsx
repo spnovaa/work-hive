@@ -2,7 +2,7 @@ import React from 'react';
 import { useForm } from 'react-hook-form';
 import { login } from '../api/auth';
 import Cookies from 'js-cookie';
-import logoImage from '../assets/d.png'; 
+import logoImage from '../assets/d.png'; // Import the logo image
 
 const Login = () => {
   const {
@@ -14,15 +14,13 @@ const Login = () => {
 
   const onSubmit = async (data) => {
     try {
-      const response = await login(data);
-      if (response.token) {
-        Cookies.set('jwt', response.token, { secure: true, sameSite: 'Strict' });
-        alert(`خوش آمدید ${response.user.name} ${response.user.lastName}`);
-      } else {
-        throw new Error('ورود ناموفق بود');
+      const { token } = await login(data);
+      if (token) {
+        Cookies.set('jwt', token, { secure: true, sameSite: 'Strict' });
+        alert('ورود با موفقیت انجام شد!');
       }
     } catch (error) {
-      setError('server', { message: error.response?.data?.error || 'ورود ناموفق بود' });
+      setError('server', { message: error.message || 'ورود ناموفق بود' });
     }
   };
 
@@ -38,27 +36,23 @@ const Login = () => {
           </div>
         </div>
 
+        {/* Login Form */}
         <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
+          {/* Phone Number Field */}
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">ایمیل</label>
+            <label className="block text-sm font-medium text-gray-700 mb-1">شماره همراه</label>
             <div className="relative">
               <input
-                type="email"
-                {...register('email', {
-                  required: 'ایمیل خود را وارد نمایید',
-                  pattern: {
-                    value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
-                    message: 'فرمت ایمیل معتبر نیست',
-                  },
-                })}
+                type="text"
+                {...register('phone', { required: 'شماره همراه خود را وارد نمایید' })}
                 className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-blue-400 focus:outline-none"
-                placeholder="ایمیل"
+                placeholder="09123456789"
               />
-              {errors.email && (
-                <p className="text-red-500 text-sm mt-1">{errors.email.message}</p>
+              {errors.phone && (
+                <p className="text-red-500 text-sm mt-1">{errors.phone.message}</p>
               )}
               <span className="absolute inset-y-0 left-3 flex items-center text-gray-400">
-                <i className="fas fa-envelope"></i>
+                <i className="fas fa-phone"></i>
               </span>
             </div>
           </div>

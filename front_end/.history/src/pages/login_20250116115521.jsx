@@ -2,7 +2,7 @@ import React from 'react';
 import { useForm } from 'react-hook-form';
 import { login } from '../api/auth';
 import Cookies from 'js-cookie';
-import logoImage from '../assets/d.png'; 
+import logoImage from '../assets/logo.png'; // Import the logo image
 
 const Login = () => {
   const {
@@ -22,7 +22,7 @@ const Login = () => {
         throw new Error('ورود ناموفق بود');
       }
     } catch (error) {
-      setError('server', { message: error.response?.data?.error || 'ورود ناموفق بود' });
+      setError('server', { message: error.message || 'ورود ناموفق بود' });
     }
   };
 
@@ -38,7 +38,9 @@ const Login = () => {
           </div>
         </div>
 
+        {/* Login Form */}
         <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
+          {/* Email Field */}
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-1">ایمیل</label>
             <div className="relative">

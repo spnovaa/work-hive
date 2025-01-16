@@ -38,7 +38,9 @@ const Login = () => {
           </div>
         </div>
 
+        {/* Login Form */}
         <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
+          {/* Email Field */}
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-1">ایمیل</label>
             <div className="relative">

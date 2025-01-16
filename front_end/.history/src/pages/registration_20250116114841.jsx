@@ -38,7 +38,7 @@ const Registration = () => {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-100" style={{ direction: 'rtl' }}>
+    <div className="min-h-screen flex items-center justify-center bg-gray-100">
    <div className="w-full max-w-md bg-white p-8 rounded-3xl shadow-xl border border-gray-200">
   <div className="text-center mb-6 flex items-center justify-center space-x-reverse space-x-2">
     <img src={logo} alt="میزیتو" className="h-12" />

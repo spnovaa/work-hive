@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const BASE_URL = 'https://work-hive.liara.run'; 
+const BASE_URL = 'https://work-hive.liara.run/'; 
 
 export const login = async (credentials) => {
   try {
