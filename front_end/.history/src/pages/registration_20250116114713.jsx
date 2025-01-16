@@ -2,7 +2,6 @@ import React from 'react';
 import { useForm } from 'react-hook-form';
 import { registerUser } from '../api/auth';
 import Cookies from 'js-cookie';
-import logo from '../assets/logo.png';
 
 const Registration = () => {
   const {
@@ -38,15 +37,9 @@ const Registration = () => {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-100" style={{ direction: 'rtl' }}>
-   <div className="w-full max-w-md bg-white p-8 rounded-3xl shadow-xl border border-gray-200">
-  <div className="text-center mb-6 flex items-center justify-center space-x-reverse space-x-2">
-    <img src={logo} alt="میزیتو" className="h-12" />
-    <div className="flex items-center space-x-reverse space-x-2">
-      <i className="fas fa-user text-gray-500 text-xl"></i>
-      <span className="font-bold text-gray-700 text-lg">میزیتو</span>
-    </div>
-  </div>
+    <div className="min-h-screen flex items-center justify-center bg-gray-100">
+      <div className="w-full max-w-md bg-white p-8 rounded-lg shadow-md" style={{ direction: 'rtl' }}>
+        <h1 className="text-2xl font-bold text-gray-700 text-center mb-6">ثبت‌نام</h1>
 
         <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
           {/* First Name Field */}

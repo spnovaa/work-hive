@@ -2,8 +2,7 @@ import React from 'react';
 import { useForm } from 'react-hook-form';
 import { login } from '../api/auth';
 import Cookies from 'js-cookie';
-import logoImage from '../assets/logo.png';
-import { useNavigate } from 'react-router-dom';
+import logoImage from '../assets/d.png'; // Ensure this path is correct
 
 const Login = () => {
   const {
@@ -12,16 +11,13 @@ const Login = () => {
     setError,
     formState: { errors },
   } = useForm();
-  const navigate = useNavigate();
+
   const onSubmit = async (data) => {
     try {
       const response = await login(data);
       if (response.token) {
-      Cookies.set('bearer', response.token, { secure: true, sameSite: 'Strict' });
-      alert(`خوش آمدید ${response.user.name} ${response.user.lastName}`);
-      navigate('/', {
-        state: { name: `${response.user.name} ${response.user.lastName}` },
-      });
+        Cookies.set('jwt', response.token, { secure: true, sameSite: 'Strict' });
+        alert(`خوش آمدید ${response.user.name} ${response.user.lastName}`);
       } else {
         throw new Error('ورود ناموفق بود');
       }
@@ -36,6 +32,7 @@ const Login = () => {
       style={{ direction: 'rtl' }}
     >
       <div className="w-full max-w-md bg-white p-8 rounded-3xl shadow-xl border border-gray-200">
+        {/* Logo and Title */}
         <div className="text-center mb-6 flex items-center justify-center space-x-reverse space-x-2">
           <img src={logoImage} alt="لوگوی میزیتو" className="h-12" />
           <div className="flex items-center space-x-reverse space-x-2">
@@ -44,7 +41,9 @@ const Login = () => {
           </div>
         </div>
 
+        {/* Login Form */}
         <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
+          {/* Email Field */}
           <div>
             <label
               htmlFor="email"
@@ -111,6 +110,7 @@ const Login = () => {
             </p>
           )}
 
+          {/* Submit Button */}
           <button
             type="submit"
             className="w-full bg-gradient-to-r from-blue-500 to-blue-600 text-white py-3 px-4 rounded-xl font-medium shadow-lg hover:shadow-xl focus:ring-2 focus:ring-blue-400 focus:outline-none"

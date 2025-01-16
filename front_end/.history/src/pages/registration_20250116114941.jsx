@@ -2,7 +2,7 @@ import React from 'react';
 import { useForm } from 'react-hook-form';
 import { registerUser } from '../api/auth';
 import Cookies from 'js-cookie';
-import logo from '../assets/logo.png';
+import logo from '../assets/d.png';
 
 const Registration = () => {
   const {
