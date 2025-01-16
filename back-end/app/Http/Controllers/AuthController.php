@@ -66,7 +66,7 @@ class AuthController extends Controller
     public function register(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'name' => 'required|string|max:64',
+            'name' => 'required|string|min:2|max:64',
             'lastName' => 'required|string|max:64',
             'email' => 'required|string|email|max:64|unique:Users,U_Email',
             'password' => 'required|string|min:6',
@@ -189,6 +189,96 @@ class AuthController extends Controller
     public function refresh()
     {
         return $this->respondWithToken(auth()->refresh());
+    }
+
+    /**
+     * @OA\Post(
+     *     path="/password/reset",
+     *     summary="Reset user's password",
+     *     description="Resets the user's password and returns a new JWT token.",
+     *     tags={"Authentication"},
+     *     @OA\RequestBody(
+     *         required=true,
+     *         @OA\JsonContent(
+     *             required={"id","currentPassword","password"},
+     *             @OA\Property(property="id", type="integer", example=1, description="User ID"),
+     *             @OA\Property(property="currentPassword", type="string", example="oldPass123", description="Current password"),
+     *             @OA\Property(property="password", type="string", example="newPass456", description="New password (min 6 characters)")
+     *         )
+     *     ),
+     *     @OA\Response(
+     *         response=204,
+     *         description="Password reset successfully",
+     *         @OA\JsonContent(
+     *             @OA\Property(property="user"),
+     *             @OA\Property(property="token", type="string", example="jwt.token.here")
+     *         )
+     *     ),
+     *     @OA\Response(
+     *         response=400,
+     *         description="Validation error",
+     *         @OA\JsonContent(
+     *             @OA\Property(property="error", type="object")
+     *         )
+     *     ),
+     *     @OA\Response(
+     *         response=500,
+     *         description="Internal server error",
+     *         @OA\JsonContent(
+     *             @OA\Property(property="code", type="string", example="error"),
+     *             @OA\Property(property="message", type="string", example="Error message")
+     *         )
+     *     ),
+     *     @OA\SecurityScheme(
+     *         securityScheme="bearerAuth",
+     *         type="http",
+     *         scheme="bearer"
+     *     )
+     * )
+     */
+    public function reset(Request $request)
+    {
+        try {
+            $validator = Validator::make($request->all(), [
+                'id' => 'required|int|min:1',
+                'currentPassword' => 'required|string|min:3',
+                'password' => 'required|string|min:6'
+            ]);
+
+            if ($validator->fails()) {
+                return response()->json($validator->errors()->toJson(), 400);
+            }
+
+            $user = User::where([
+                'U_Id' => $request->id,
+                'U_Password' => Hash::make($request->get('currentPassword'))
+            ]);
+
+            if (!$user)
+                return response()->json([
+                    'message' => 'Invalid Credentials',
+                    'code' => 'error'
+                ], 403);
+
+            $user->update([
+                'U_Password' => Hash::make($request->get('password'))
+            ]);
+
+            $user = User::find($request->id);
+
+            $token = JWTAuth::fromUser($user);
+
+            return response()->json([
+                'user' => new UserResource($user),
+                'token' => $token
+            ], 204);
+
+        } catch (\Throwable $throwable) {
+            return response()->json([
+                'code' => 'error',
+                'message' => $throwable->getMessage()
+            ]);
+        }
     }
 
     /**
