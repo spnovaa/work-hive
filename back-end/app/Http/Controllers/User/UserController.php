@@ -6,9 +6,8 @@ use App\Http\Resources\UserResource;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
-use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
-use Tymon\JWTAuth\Facades\JWTAuth;
+use Illuminate\Support\Facades\Storage;
 
 class UserController extends Controller
 {
@@ -99,7 +98,8 @@ class UserController extends Controller
             return response()->json([
                 'code' => 'error',
                 'message' => $throwable->getMessage()
-            ]);
+            ], 500);
         }
     }
+
 }

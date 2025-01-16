@@ -277,7 +277,7 @@ class AuthController extends Controller
             return response()->json([
                 'code' => 'error',
                 'message' => $throwable->getMessage()
-            ]);
+            ], 500);
         }
     }
 

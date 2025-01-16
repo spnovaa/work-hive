@@ -25,6 +25,6 @@ class UserResource extends JsonResource
 
     private function getProfileUrl()
     {
-        return env('APP_URL') . '/public/user_profiles/' . $this->id . '/' . $this->U_ProfileImg;
+        return env('APP_URL') . '/public/profile_images/' . $this->U_ProfileImg;
     }
 }
