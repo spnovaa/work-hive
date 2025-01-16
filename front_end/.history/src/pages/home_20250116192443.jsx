@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import ProfileSection from '../components/profile/profileSection';
 import { useLocation } from 'react-router-dom';
-import DashboardSidebar from '../components/dashboardSidebar';
+import DashboardSidebar from '../components/dashboardSlidebar';
 function Home() {
   const location = useLocation();
   const name = location.state?.name || "نام کاربری ناشناس";
@@ -11,7 +11,7 @@ function Home() {
   };
   const getCurrentDate = () => {
     const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
-    return new Date().toLocaleDateString('fa-IR', options); 
+    return new Date().toLocaleDateString('fa-IR', options); // Persian calendar format
   };
   return (
     <div className={`h-screen ${background} p-4`}>
@@ -22,6 +22,10 @@ function Home() {
           date={getCurrentDate()}
           onBackgroundChange={handleBackgroundChange}
         />
+      </div>
+      {/* Dashboard Sidebar */}
+      <div className="absolute top-4 right-4">
+        <DashboardSidebar />
       </div>
     </div>
   );

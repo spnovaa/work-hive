@@ -21,7 +21,7 @@ function App() {
           path="*"
           element={
             <div className="flex h-screen">
-              <div className="absolute top-4 right-4 w-64 bg-gray-100">
+              <div className="w-64 bg-gray-100">
                 <DashboardSidebar />
               </div>
               <div className="flex-grow p-4">

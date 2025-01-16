@@ -11,7 +11,7 @@ function Home() {
   };
   const getCurrentDate = () => {
     const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
-    return new Date().toLocaleDateString('fa-IR', options); 
+    return new Date().toLocaleDateString('fa-IR', options); // Persian calendar format
   };
   return (
     <div className={`h-screen ${background} p-4`}>
