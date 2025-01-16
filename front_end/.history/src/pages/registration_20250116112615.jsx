@@ -19,17 +19,16 @@ const Registration = () => {
 
     try {
       const response = await registerUser({
-        name: data.firstName, // Matches the Swagger API field
-        lastName: data.lastName, // Matches the Swagger API field
+        name: data.username, // Adjusted field to align with Swagger documentation
         email: data.email,
         password: data.password,
       });
 
       if (response.token) {
         Cookies.set('jwt', response.token, { secure: true, sameSite: 'Strict' });
-        alert(`ثبت‌نام موفقیت‌آمیز بود! خوش آمدید ${response.user.name} ${response.user.lastName}`);
+        alert('ثبت‌نام موفقیت‌آمیز بود!');
       } else {
-        throw new Error('Unknown error occurred during registration');
+        throw new Error(response.message || 'Unknown error occurred');
       }
     } catch (error) {
       setError('server', { message: error.message || 'خطایی رخ داد' });
@@ -42,31 +41,17 @@ const Registration = () => {
         <h1 className="text-2xl font-bold text-gray-700 text-center mb-6">ثبت‌نام</h1>
 
         <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
-          {/* First Name Field */}
+          {/* Username Field */}
           <div className="relative mb-4">
-            <label className="block text-sm font-medium text-gray-700 mb-1">نام</label>
+            <label className="block text-sm font-medium text-gray-700 mb-1">نام کاربری</label>
             <input
               type="text"
-              {...register('firstName', { required: 'نام الزامی است' })}
+              {...register('username', { required: 'نام کاربری الزامی است' })}
               className="w-full border border-gray-300 rounded-lg px-3 py-2 text-gray-900 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-              placeholder="نام"
+              placeholder="نام کاربری"
             />
-            {errors.firstName && (
-              <p className="text-red-500 text-sm mt-1">{errors.firstName.message}</p>
-            )}
-          </div>
-
-          {/* Last Name Field */}
-          <div className="relative mb-4">
-            <label className="block text-sm font-medium text-gray-700 mb-1">نام خانوادگی</label>
-            <input
-              type="text"
-              {...register('lastName', { required: 'نام خانوادگی الزامی است' })}
-              className="w-full border border-gray-300 rounded-lg px-3 py-2 text-gray-900 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-              placeholder="نام خانوادگی"
-            />
-            {errors.lastName && (
-              <p className="text-red-500 text-sm mt-1">{errors.lastName.message}</p>
+            {errors.username && (
+              <p className="text-red-500 text-sm mt-1">{errors.username.message}</p>
             )}
           </div>
 
