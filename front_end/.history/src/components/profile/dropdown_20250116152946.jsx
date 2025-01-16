@@ -48,10 +48,10 @@ const ProfileDropdown  = ({  onBackgroundChange }) => {
   return (
     <div
   onClick={(e) => e.stopPropagation()}
-  className="absolute top-0 left-0  bg-white rounded-lg shadow-lg w-max p-4"
+  className="absolute top-0 left-0  bg-white rounded-lg shadow-lg w-full p-4"
 >
   <div
-    className="flex items-center justify-between p-2 cursor-pointer hover:bg-gray-100 rounded"
+    className="table items-center justify-between p-2 cursor-pointer hover:bg-gray-100 rounded"
     onClick={() => alert('Account Settings Clicked')}
   >
     <span>تنظیمات حساب کاربری</span>

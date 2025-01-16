@@ -1,9 +1,7 @@
 import React, { useState } from 'react';
 import ProfileSection from '../components/profile/profileSection';
-import { useLocation } from 'react-router-dom';
-function Home() {
-  const location = useLocation();
-  const name = location.state?.name || "نام کاربری ناشناس";
+
+function Home({name =null}) {
   const [background, setBackground] = useState('bg-white');
   const handleBackgroundChange = (bg) => {
     setBackground(bg);
@@ -17,7 +15,7 @@ function Home() {
       <div className="absolute top-4 left-4">
         <ProfileSection
           name={name}
-          greeting="ظهر بخیر"
+          greeting="ظهر بخیر!"
           date={getCurrentDate()}
           onBackgroundChange={handleBackgroundChange}
         />

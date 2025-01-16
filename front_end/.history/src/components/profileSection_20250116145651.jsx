@@ -4,7 +4,6 @@ const ProfileSection = ({ name, greeting, date }) => {
   return (
     <div className="p-4 bg-gradient-to-r from-blue-100 to-blue-200 rounded-lg shadow-md max-w-xs">
       <div className="flex flex-col items-center">
-        {/* Avatar */}
         <div className="bg-gray-300 w-24 h-24 rounded-full flex items-center justify-center mb-4">
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -22,13 +21,10 @@ const ProfileSection = ({ name, greeting, date }) => {
           </svg>
         </div>
 
-        {/* Name */}
         <h2 className="text-lg font-semibold text-gray-700">{name}</h2>
 
-        {/* Greeting */}
         <p className="text-sm text-gray-600 mt-1">{greeting}</p>
 
-        {/* Date */}
         <p className="text-sm text-gray-500 mt-1">{date}</p>
       </div>
     </div>
