@@ -4,7 +4,7 @@ const BASE_URL = 'https://work-hive.liara.run';
 
 export const login = async (credentials) => {
   try {
-    const response = await axios.post(`${BASE_URL}/api/login`, credentials, {
+    const response = await axios.post(`${BASE_URL}/api/register`, credentials, {
       headers: {
         'Content-Type': 'application/json',
       },
@@ -17,7 +17,7 @@ export const login = async (credentials) => {
 
 export const registerUser = async (userData) => {
   try {
-    const response = await axios.post(`${BASE_URL}/api/register`, userData, {
+    const response = await axios.post(`${BASE_URL}/auth/register`, userData, {
       headers: {
         'Content-Type': 'application/json',
       },

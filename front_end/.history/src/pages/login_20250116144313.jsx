@@ -19,9 +19,7 @@ const Login = () => {
       if (response.token) {
       Cookies.set('bearer', response.token, { secure: true, sameSite: 'Strict' });
       alert(`خوش آمدید ${response.user.name} ${response.user.lastName}`);
-      navigate('/', {
-        state: { name: `${response.user.name} ${response.user.lastName}` },
-      });
+      navigate('/');
       } else {
         throw new Error('ورود ناموفق بود');
       }
