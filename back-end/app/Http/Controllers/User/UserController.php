@@ -102,4 +102,88 @@ class UserController extends Controller
         }
     }
 
+
+    /**
+     * @OA\Schema(
+     *     schema="UserResource",
+     *     type="object",
+     *     title="UserResource",
+     *     description="Resource representation of a user",
+     *     @OA\Property(
+     *         property="id",
+     *         type="integer",
+     *         description="ID of the user",
+     *         example=1
+     *     ),
+     *     @OA\Property(
+     *         property="email",
+     *         type="string",
+     *         description="Email address of the user",
+     *         example="user@example.com"
+     *     ),
+     *     @OA\Property(
+     *         property="name",
+     *         type="string",
+     *         description="First name of the user",
+     *         example="John"
+     *     ),
+     *     @OA\Property(
+     *         property="lastName",
+     *         type="string",
+     *         description="Last name of the user",
+     *         example="Doe"
+     *     ),
+     *     @OA\Property(
+     *         property="profileImage",
+     *         type="string",
+     *         description="URL of the user's profile image. Returns null if no profile image is set.",
+     *         example="https://work-hive.liara.run/public/user_profiles/user.jpg",
+     *         nullable=true
+     *     )
+     * ),
+     *
+     * @OA\Get(
+     *     path="/api/users",
+     *     operationId="getAllUsers",
+     *     tags={"Users"},
+     *     summary="Get all users",
+     *     description="Fetches all users from the database.",
+     *     @OA\Response(
+     *         response=200,
+     *         description="Users retrieved successfully",
+     *         @OA\JsonContent(
+     *             type="object",
+     *             @OA\Property(
+     *                 property="data",
+     *                 type="array",
+     *                 @OA\Items(
+     *                     type="object",
+     *                     ref="#/components/schemas/UserResource"
+     *                 )
+     *             )
+     *         )
+     *     ),
+     *     @OA\Response(
+     *         response=500,
+     *         description="Server error",
+     *         @OA\JsonContent(
+     *             type="object",
+     *             @OA\Property(property="code", type="string", example="error"),
+     *             @OA\Property(property="message", type="string", example="Detailed error message")
+     *         )
+     *     )
+     * )
+     */
+    public function index()
+    {
+        try {
+            return response()->json(UserResource::collection(User::all()));
+        } catch (\Throwable $throwable) {
+            return response()->json([
+                'code' => 'error',
+                'message' => $throwable->getMessage()
+            ]);
+        }
+    }
+
 }

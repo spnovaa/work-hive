@@ -58,7 +58,7 @@ class TeamMemberController extends Controller
      *     path="/api/user/teams/{id}",
      *     summary="Get a team by ID",
      *     description="Retrieve a specific team by its ID.",
-     *     operationId="getTeamById",
+     *     operationId="getMemberTeamById",
      *     tags={"Teams"},
      *     @OA\Parameter(
      *         name="id",

@@ -23,6 +23,7 @@ Route::post('/teams/users', [TeamUserController::class, 'store']);
 Route::post('/teams/users/{team_id}', [TeamUserController::class, 'show']);
 
 
+Route::get('/users', [UserController::class, 'index']);
 Route::post('/users/{userId}/profile-image', [UserProfileImageController::class, 'store']);
 Route::put('/users/{userId}/profile-image', [UserProfileImageController::class, 'update']);
 Route::delete('/users/{userId}/profile-image', [UserProfileImageController::class, 'destroy']);
