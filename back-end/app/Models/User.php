@@ -7,6 +7,7 @@ use App\Models\Task\UsersTasks;
 use App\Models\Team\Team;
 use App\Models\Team\TeamsUsers;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Tymon\JWTAuth\Contracts\JWTSubject;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -64,5 +65,13 @@ class User extends Authenticatable implements JWTSubject
     public function tasks(): BelongsToMany
     {
         return $this->belongsToMany(Task::class, UsersTasks::class, 'U_UserId', 'U_TaskId');
+    }
+
+    /**
+     * @return HasMany
+     */
+    public function admin_of_teams(): HasMany
+    {
+        return $this->hasMany(Team::class, 'T_AdminId', 'T_Id');
     }
 }

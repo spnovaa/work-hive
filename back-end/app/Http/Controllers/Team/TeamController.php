@@ -51,7 +51,8 @@ class TeamController extends Controller
     public function index()
     {
         try {
-            return response()->json(TeamShowResource::collection(Team::all()));
+            $teams = auth()->user()->admin_of_teams;
+            return response()->json(TeamShowResource::collection($teams));
         } catch (\Throwable $throwable) {
             return response()->json([
                 'code' => 'error',
@@ -125,7 +126,8 @@ class TeamController extends Controller
             }
 
             $team = Team::create([
-                'T_Name' => $request->get('name')
+                'T_Name' => $request->get('name'),
+                'T_AdminId' => auth()->id()
             ]);
 
             return response()->json([
@@ -184,8 +186,12 @@ class TeamController extends Controller
     public function show(string $id)
     {
         try {
+            $teams = Team::where([
+                'T_Id' => $id,
+                'T_AdminId' => auth()->id()
+            ])->first();
             return response()->json([
-                'team' => new TeamShowResource(Team::find($id))
+                'team' => new TeamShowResource($teams)
             ]);
         } catch (\Throwable $throwable) {
             return response()->json([
@@ -255,7 +261,17 @@ class TeamController extends Controller
     public function update(Request $request, int $id)
     {
         try {
-            Team::find($id)->update(['T_Name' => $request->name]);
+            $team = Team::where([
+                'T_AdminId' => auth()->id(),
+                'T_Id' => $id
+            ])->first();
+
+            if (!$team)
+                return response()->json([
+                    'code' => 'error',
+                    'message' => 'Team Not Found! You Might Not Have Access To The Intended Team'
+                ], 404);
+
             return response()->json([
                 'team' => new TeamShowResource(Team::find($id))
             ]);
@@ -312,8 +328,19 @@ class TeamController extends Controller
     {
         try {
             DB::beginTransaction();
+            $team = Team::where([
+                'T_AdminId' => auth()->id(),
+                'T_Id' => $id
+            ])->first();
+
+            if (!$team)
+                return response()->json([
+                    'code' => 'error',
+                    'message' => 'Team Not Found! You Might Not Have Access To The Intended Team'
+                ], 404);
+
             TeamsUsers::where('T_TeamId', $id)->delete();
-            Team::where('T_Id', $id)->delete();
+            $team->delete();
             DB::commit();
             return response()->json([
                 'message' => 'team removed successfully',

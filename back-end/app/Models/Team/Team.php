@@ -5,6 +5,7 @@ namespace App\Models\Team;
 use App\Models\Project\Project;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
@@ -30,5 +31,13 @@ class Team extends Model
     public function projects(): HasMany
     {
         return $this->hasMany(Project::class, 'P_TeamId', 'T_Id');
+    }
+
+    /**
+     * @return BelongsTo
+     */
+    public function admin(): BelongsTo
+    {
+        return $this->belongsTo(User::class, 'T_AdminId', 'U_Id');
     }
 }

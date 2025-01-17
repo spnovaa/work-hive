@@ -17,10 +17,12 @@ GO
 CREATE TABLE Teams(
 	T_Id				BIGINT				IDENTITY,
 	T_Name				NVARCHAR(128)		NOT NULL,
+    T_AdminId           BIGINT              NOT NULL,
 	T_CreatedAt			DATETIME2			NOT NULL,
 	T_UpdatedAt			DATETIME2			NOT NULL,
 
 	CONSTRAINT			PKTeams				PRIMARY KEY(T_Id),
+    CONSTRAINT          FKTeamAdmin         FOREIGN KEY(T_AdminId)      REFERENCES Users(U_Id)
 )
 GO
 

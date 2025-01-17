@@ -252,7 +252,7 @@ class AuthController extends Controller
             $user = User::where([
                 'U_Id' => $request->id,
                 'U_Password' => Hash::make($request->get('currentPassword'))
-            ]);
+            ])->first();
 
             if (!$user)
                 return response()->json([
