@@ -15,6 +15,9 @@ class TaskShowResource extends JsonResource
      */
     public function toArray(Request $request): array
     {
+        if (!$this->T_Id)
+            return [];
+
         return [
             'id' => $this->T_Id,
             'title' => $this->T_Title,
@@ -22,6 +25,7 @@ class TaskShowResource extends JsonResource
             'progress' => $this->T_Progress,
             'dueDate' => $this->T_DueDate,
             'priority' => $this->Priority,
+            'subTasks' => SubTaskShowResource::collection($this->sub_tasks),
             'project' => new ProjectShowResource($this->project),
         ];
     }

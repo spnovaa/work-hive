@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\Project\ProjectController;
+use App\Http\Controllers\Task\SubTaskController;
 use App\Http\Controllers\Task\TaskController;
 use App\Http\Controllers\Team\TeamController;
 use App\Http\Controllers\Team\TeamUserController;
@@ -28,5 +30,7 @@ Route::delete('/teams/users', [TeamUserController::class, 'destroy']);
 
 Route::resource('teams', TeamController::class);
 Route::resource('tasks', TaskController::class);
+Route::resource('subtasks', SubTaskController::class);
+Route::resource('projects', ProjectController::class);
 Route::put('/users/{id}', [UserController::class, 'update']);
 

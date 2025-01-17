@@ -15,6 +15,8 @@ class ProjectShowResource extends JsonResource
      */
     public function toArray(Request $request): array
     {
+        if (!$this->P_Id)
+            return [];
         return [
             'id' => $this->P_Id,
             'name' => $this->P_Name,
