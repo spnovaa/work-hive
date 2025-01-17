@@ -19,7 +19,7 @@ const Login = () => {
       setLoading(true);
       const response = await login(data);
       if (response.token) {
-      Cookies.set('bearer', response.token, { secure: true,});
+      Cookies.set('bearer', response.token, { secure: true, sameSite: 'Strict' });
       alert(`خوش آمدید ${response.user.name} ${response.user.lastName}`);
       navigate('/', {
         state: { name: `${response.user.name} ${response.user.lastName}` },
@@ -33,16 +33,12 @@ const Login = () => {
                   setLoading(false);
               }
   }
+ if (loading) return <Spinner />;
   return (
     <div
       className="min-h-screen flex items-center justify-center bg-gradient-to-r from-blue-100 to-blue-300"
       style={{ direction: 'rtl' }}
     >
-       {loading && (
-            <div className="absolute inset-0 bg-opacity-50 bg-gray-100 flex items-center justify-center z-50">
-                <Spinner />
-            </div>
-        )}
       <div className="w-full max-w-md bg-white p-8 rounded-3xl shadow-xl border border-gray-200">
         <div className="text-center mb-6 flex items-center justify-center space-x-reverse space-x-2">
           <img src={logoImage} alt="لوگوی میزیتو" className="h-12" />

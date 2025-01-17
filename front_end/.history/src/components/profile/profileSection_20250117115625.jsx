@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import ProfileDropdown from './dropdown.jsx';
 
-const ProfileSection = ({ name, greeting, date, onBackgroundChange ,onSettingsClick}) => {
+const ProfileSection = ({ name, greeting, date, onBackgroundChange }) => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const dropdownRef = useRef(null);
 
@@ -58,7 +58,7 @@ const ProfileSection = ({ name, greeting, date, onBackgroundChange ,onSettingsCl
       ref={dropdownRef}
       className="absolute top-0 left-0  bg-white rounded-lg shadow-lg p-4 w-full"
     >
-      <ProfileDropdown onBackgroundChange={onBackgroundChange} onSettingsClick={onSettingsClick} />
+      <ProfileDropdown onBackgroundChange={onBackgroundChange} />
     </div>
   )}
 </div>

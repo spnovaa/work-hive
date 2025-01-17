@@ -31,7 +31,6 @@ function Home() {
           greeting="ظهر بخیر"
           date={getCurrentDate()}
           onBackgroundChange={handleBackgroundChange}
-          onSettingsClick={openModal}
         />
       </div>
       <ProfileSettingsModal show={isModalOpen} onClose={closeModal} />

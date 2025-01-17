@@ -58,7 +58,7 @@ const ProfileSection = ({ name, greeting, date, onBackgroundChange ,onSettingsCl
       ref={dropdownRef}
       className="absolute top-0 left-0  bg-white rounded-lg shadow-lg p-4 w-full"
     >
-      <ProfileDropdown onBackgroundChange={onBackgroundChange} onSettingsClick={onSettingsClick} />
+      <ProfileDropdown onBackgroundChange={onBackgroundChange} onSettingsClick />
     </div>
   )}
 </div>
