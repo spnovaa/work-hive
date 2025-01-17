@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 function SidebarItem({ icon, label, notificationCount, onClick }) {
     return (
         <div 
-            className="className=flex items-center justify-start flex-row-reverse p-4 cursor-pointer hover:bg-gray-100"
+            className="flex items-center justify-between p-2 hover:bg-gray-100 rounded-md cursor-pointer"
             onClick={onClick}
         >
             <div className="flex items-center">
@@ -30,28 +30,7 @@ function DashboardSidebar() {
     return (
         <div className="w-64 bg-white shadow-md p-4">
            <SidebarItem 
-    icon={
-        <svg
-            xmlns="http://www.w3.org/2000/svg"
-            className="h-6 w-6 text-red-500"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-        >
-            <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="2"
-                d="M3 9.75L12 3l9 6.75v9.75A2.25 2.25 0 0118.75 21H5.25A2.25 2.25 0 013 19.5V9.75z"
-            />
-            <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="2"
-                d="M9 21V12h6v9"
-            />
-        </svg>
-    } 
+    icon={<i className="fas fa-home" />} 
     label="داشبورد" 
     onClick={() => console.log('Navigate to Dashboard')} 
 />

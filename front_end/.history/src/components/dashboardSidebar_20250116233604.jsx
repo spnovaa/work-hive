@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 function SidebarItem({ icon, label, notificationCount, onClick }) {
     return (
         <div 
-            className="className=flex items-center justify-start flex-row-reverse p-4 cursor-pointer hover:bg-gray-100"
+            className="className=flex items-center justify-end flex-row-reverse p-4 cursor-pointer hover:bg-gray-100"
             onClick={onClick}
         >
             <div className="flex items-center">

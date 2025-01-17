@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import ProjectCard from './projectCardComponent.jsx'
 import Spinner from '../loadingSpinner.jsx'
-import axiosInstance from '../../common/axiosInstance.js'
+import axiosInstance from '../../common/axiosInstacne.js'
 
 
 const BASE_URL = process.env.REACT_APP_API_URL
@@ -14,12 +14,12 @@ function ProjectsDashboard() {
     useEffect(() => {
         async function fetchProjects() {
             try {
-                const response = await axiosInstance.get('https://work-hive.liara.run/api/projects');
-                if (response.status !== 200) {
-                    throw new Error(`Failed to fetch projects: ${response.status} ${response.statusText}`);
+                const response = await axiosInstance.get('/api/projects');
+                if (!response.ok) {
+                    throw new Error('Failed to fetch projects');
                 }
-                
-                setProjects(response.data.projects);
+                const data = await response.json();
+                setProjects(data);
             } catch (error) {
                 setError(error.message);
             } finally {

@@ -14,12 +14,12 @@ function ProjectsDashboard() {
     useEffect(() => {
         async function fetchProjects() {
             try {
-                const response = await axiosInstance.get('https://work-hive.liara.run/api/projects');
-                if (response.status !== 200) {
-                    throw new Error(`Failed to fetch projects: ${response.status} ${response.statusText}`);
+                const response = await axiosInstance.get('/api/projects');
+                if (!response.ok) {
+                    throw new Error('Failed to fetch projects');
                 }
-                
-                setProjects(response.data.projects);
+                const data = await response.json();
+                setProjects(data);
             } catch (error) {
                 setError(error.message);
             } finally {

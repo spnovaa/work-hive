@@ -19,7 +19,8 @@ const Login = () => {
       setLoading(true);
       const response = await login(data);
       if (response.token) {
-      Cookies.set('bearer', response.token, { secure: true,});
+      Cookies.set('bearer', response.token, { secure: true, sameSite: 'Strict' });
+      setLoading(false);
       alert(`خوش آمدید ${response.user.name} ${response.user.lastName}`);
       navigate('/', {
         state: { name: `${response.user.name} ${response.user.lastName}` },

@@ -19,7 +19,8 @@ function ProjectsDashboard() {
                     throw new Error(`Failed to fetch projects: ${response.status} ${response.statusText}`);
                 }
                 
-                setProjects(response.data.projects);
+                const data = await response.json();
+                setProjects(data);
             } catch (error) {
                 setError(error.message);
             } finally {
