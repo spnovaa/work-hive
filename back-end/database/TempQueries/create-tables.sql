@@ -29,10 +29,10 @@ CREATE TABLE Projects(
 	P_Id				BIGINT				IDENTITY(1,1),
 	P_TeamId			BIGINT				NULL,
 	P_Name				NVARCHAR(64)		NOT NULL,
-	P_Img				NVARCHAR(64)		NOT NULL,
+	P_Img				NVARCHAR(64)		NULL,
 	P_CreatedAt			DATETIME2			NOT NULL,
 	P_UpdatedAt			DATETIME2			NOT NULL,
-	
+
 	CONSTRAINT			PKProjects			PRIMARY KEY(P_Id),
 	CONSTRAINT			FKProjectTeam		FOREIGN KEY(P_TeamId)		REFERENCES Teams(T_Id)
 )
@@ -98,3 +98,15 @@ CREATE TABLE TeamUsers(
     CONSTRAINT          FKTeamUsersUser     FOREIGN KEY(T_UserId)           REFERENCES Users(U_Id),
     CONSTRAINT          FKTeamUsersTeam     FOREIGN KEY(T_TeamId)           REFERENCES Teams(T_Id)
 )
+GO
+
+CREATE TABLE UsersTasks(
+    U_Id                BIGINT              IDENTITY(1, 1),
+    U_TaskId            BIGINT              NOT NULL,
+    U_UserId            BIGINT              NOT NULL,
+
+    CONSTRAINT          PKUserTasks         PRIMARY KEY(U_Id),
+    CONSTRAINT          FKUserTasksUser     FOREIGN KEY(U_UserId)           REFERENCES Users(U_Id),
+    CONSTRAINT          FKUserTasksTask     FOREIGN KEY(U_TaskId)           REFERENCES Tasks(T_Id)
+)
+GO

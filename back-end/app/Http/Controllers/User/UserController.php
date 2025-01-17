@@ -23,7 +23,7 @@ class UserController extends Controller
 
     /**
      * @OA\Put(
-     *     path="/users/{id}",
+     *     path="/api/users/{id}",
      *     summary="Update user information",
      *     description="Updates the specified user's name, last name, and email.",
      *     tags={"Users"},
@@ -85,7 +85,7 @@ class UserController extends Controller
                 return response()->json($validator->errors()->toJson(), 400);
             }
 
-            $user = User::where('id', $id)->update([
+            $user = User::where('U_Id', $id)->update([
                 'U_Name' => $request->get('name'),
                 'U_LastName' => $request->get('lastName'),
                 'U_Email' => $request->get('email'),

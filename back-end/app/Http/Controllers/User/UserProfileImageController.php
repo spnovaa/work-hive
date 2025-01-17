@@ -13,7 +13,7 @@ class UserProfileImageController extends Controller
 
     /**
      * @OA\Post(
-     *     path="/users/{userId}/profile-image",
+     *     path="/api/users/{userId}/profile-image",
      *     summary="Upload or update a user's profile image",
      *     description="Uploads a profile image for the specified user and stores the file in the server. The stored image can be accessed via the provided URL.",
      *     tags={"Users"},
@@ -136,7 +136,7 @@ class UserProfileImageController extends Controller
 
     /**
      * @OA\Put(
-     *     path="/users/{userId}/profile-image",
+     *     path="/api/users/{userId}/profile-image",
      *     summary="Update a user's profile image",
      *     description="Replaces the existing profile image of a user with a new one. Deletes the old image and uploads the new image.",
      *     tags={"Users"},
@@ -255,7 +255,7 @@ class UserProfileImageController extends Controller
 
     /**
      * @OA\Delete(
-     *     path="/users/{userId}/profile-image",
+     *     path="/api/users/{userId}/profile-image",
      *     summary="Delete a user's profile image",
      *     description="Deletes the profile image of a user from the server and removes the image reference from the database.",
      *     tags={"Users"},

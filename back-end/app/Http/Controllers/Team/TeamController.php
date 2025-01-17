@@ -25,7 +25,7 @@ class TeamController extends Controller
     /**
      *
      * @OA\Get(
-     *     path="/api/teams",
+     *     path="/api/api/teams",
      *     summary="Get all teams",
      *     description="Retrieve a list of all teams.",
      *     operationId="getTeams",
@@ -63,7 +63,7 @@ class TeamController extends Controller
 
     /**
      * @OA\Post(
-     *     path="/teams",
+     *     path="/api/teams",
      *     operationId="createTeam",
      *     tags={"Teams"},
      *     summary="Create a new team",
@@ -197,7 +197,7 @@ class TeamController extends Controller
 
     /**
      * @OA\Put(
-     *     path="/teams/{id}",
+     *     path="/api/teams/{id}",
      *     operationId="updateTeam",
      *     tags={"Teams"},
      *     summary="Update an existing team",
@@ -270,7 +270,7 @@ class TeamController extends Controller
 
     /**
      * @OA\Delete(
-     *     path="/teams/{id}",
+     *     path="/api/teams/{id}",
      *     operationId="deleteTeam",
      *     tags={"Teams"},
      *     summary="Delete a team",

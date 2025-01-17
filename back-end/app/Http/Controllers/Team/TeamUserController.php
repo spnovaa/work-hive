@@ -14,7 +14,7 @@ class TeamUserController extends Controller
 {
     /**
      * @OA\Post(
-     *     path="/teams/users",
+     *     path="/api/teams/users",
      *     summary="Add user to a team",
      *     description="Associates a user with a team by inserting a record into the TeamsUsers table.",
      *     tags={"Teams"},
@@ -88,7 +88,7 @@ class TeamUserController extends Controller
 
     /**
      * @OA\Get(
-     *     path="/teams/users/{team_id}",
+     *     path="/api/teams/users/{team_id}",
      *     summary="Get team users",
      *     description="Retrieves detailed information about a specific team users by its ID.",
      *     tags={"Teams"},
@@ -140,7 +140,7 @@ class TeamUserController extends Controller
 
     /**
      * @OA\Get(
-     *     path="/users/{user_id}/teams",
+     *     path="/api/users/{user_id}/teams",
      *     summary="Get all teams of a user",
      *     description="Retrieves all teams that a specific user is a member of.",
      *     tags={"Users", "Teams"},
@@ -197,7 +197,7 @@ class TeamUserController extends Controller
 
     /**
      * @OA\Delete(
-     *     path="/teams/users",
+     *     path="/api/teams/users",
      *     summary="Remove user from a team",
      *     description="Removes a user from a specific team by deleting the association in the TeamsUsers table.",
      *     tags={"Teams"},

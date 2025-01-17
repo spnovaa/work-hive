@@ -2,6 +2,8 @@
 
 namespace App\Models;
 
+use App\Models\Task\Task;
+use App\Models\Task\UsersTasks;
 use App\Models\Team\Team;
 use App\Models\Team\TeamsUsers;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
@@ -57,5 +59,10 @@ class User extends Authenticatable implements JWTSubject
     public function teams(): BelongsToMany
     {
         return $this->belongsToMany(Team::class, TeamsUsers::class, 'T_UserId', 'T_TeamId');
+    }
+
+    public function tasks(): BelongsToMany
+    {
+        return $this->belongsToMany(Task::class, UsersTasks::class, 'U_UserId', 'U_TaskId');
     }
 }

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Project;
 
 use App\Http\Resources\Project\ProjectShowResource;
 use App\Models\Project\Project;
+use App\Models\Team\Team;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Validator;
@@ -35,7 +36,7 @@ class ProjectController extends Controller
      *  ),
      *
      * @OA\Get(
-     *     path="/projects/{id}",
+     *     path="/api/projects/{id}",
      *     summary="Get a project by ID",
      *     description="Fetches a project by its ID and returns its details.",
      *     tags={"Projects"},
@@ -108,7 +109,7 @@ class ProjectController extends Controller
 
     /**
      * @OA\Get(
-     *     path="/projects",
+     *     path="/api/projects",
      *     summary="Get all projects",
      *     description="Fetches all projects and returns their details.",
      *     tags={"Projects"},
@@ -154,7 +155,7 @@ class ProjectController extends Controller
 
     /**
      * @OA\Post(
-     *     path="/projects",
+     *     path="/api/projects",
      *     operationId="storeProject",
      *     tags={"Projects"},
      *     summary="Create a new project",
@@ -233,6 +234,12 @@ class ProjectController extends Controller
                 return response()->json($validator->errors()->toJson(), 400);
             }
 
+            if (!Team::where('T_Id', $request->get('teamId'))->exists())
+                return response()->json([
+                    'code' => 'error',
+                    'message' => 'Team Not Found!'
+                ], 404);
+
             $project = Project::create([
                 'P_Name' => $request->get('name'),
                 'P_TeamId' => $request->get('teamId')
@@ -252,7 +259,7 @@ class ProjectController extends Controller
 
     /**
      * @OA\Put(
-     *     path="/projects/{id}",
+     *     path="/api/projects/{id}",
      *     operationId="updateProject",
      *     tags={"Projects"},
      *     summary="Update an existing project",
@@ -360,7 +367,7 @@ class ProjectController extends Controller
 
     /**
      * @OA\Delete(
-     *     path="/projects/{id}",
+     *     path="/api/projects/{id}",
      *     operationId="deleteProject",
      *     tags={"Projects"},
      *     summary="Delete a project",

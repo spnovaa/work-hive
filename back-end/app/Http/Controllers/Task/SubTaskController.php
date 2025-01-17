@@ -54,7 +54,7 @@ class SubTaskController extends Controller
      * ),
      *
      * @OA\Get(
-     *     path="/subtasks/{id}",
+     *     path="/api/subtasks/{id}",
      *     operationId="showSubTask",
      *     tags={"SubTasks"},
      *     summary="Get a subtask by ID",
@@ -125,7 +125,7 @@ class SubTaskController extends Controller
 
     /**
      * @OA\Get(
-     *     path="/subtasks",
+     *     path="/api/subtasks",
      *     operationId="indexSubTasks",
      *     tags={"SubTasks"},
      *     summary="Get subtasks by task ID",
@@ -211,7 +211,7 @@ class SubTaskController extends Controller
 
     /**
      * @OA\Post(
-     *     path="/subtasks",
+     *     path="/api/subtasks",
      *     operationId="storeSubTask",
      *     tags={"SubTasks"},
      *     summary="Create a new subtask",
@@ -333,7 +333,7 @@ class SubTaskController extends Controller
 
     /**
      * @OA\Put(
-     *     path="/subtasks/{id}",
+     *     path="/api/subtasks/{id}",
      *     operationId="updateSubTask",
      *     tags={"SubTasks"},
      *     summary="Update a subtask by ID",

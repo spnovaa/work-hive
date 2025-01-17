@@ -4,6 +4,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\Project\ProjectController;
 use App\Http\Controllers\Task\SubTaskController;
 use App\Http\Controllers\Task\TaskController;
+use App\Http\Controllers\Task\UserTaskController;
 use App\Http\Controllers\Team\TeamController;
 use App\Http\Controllers\Team\TeamUserController;
 use App\Http\Controllers\User\UserController;
@@ -29,6 +30,10 @@ Route::post('/users/{user_id}/teams', [TeamUserController::class, 'showUserTeams
 Route::delete('/teams/users', [TeamUserController::class, 'destroy']);
 
 Route::resource('teams', TeamController::class);
+Route::get('/user/tasks', [UserTaskController::class, 'index']);
+Route::post('/user/tasks', [UserTaskController::class, 'store']);
+Route::delete('/user/tasks', [UserTaskController::class, 'destroy']);
+
 Route::resource('tasks', TaskController::class);
 Route::resource('subtasks', SubTaskController::class);
 Route::resource('projects', ProjectController::class);

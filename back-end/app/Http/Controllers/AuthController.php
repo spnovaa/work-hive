@@ -193,7 +193,7 @@ class AuthController extends Controller
 
     /**
      * @OA\Post(
-     *     path="/password/reset",
+     *     path="/api/password/reset",
      *     summary="Reset user's password",
      *     description="Resets the user's password and returns a new JWT token.",
      *     tags={"Authentication"},

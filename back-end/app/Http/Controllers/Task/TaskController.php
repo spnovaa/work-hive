@@ -71,7 +71,7 @@ class TaskController extends Controller
      *      )
      *  ),
      * @OA\Get(
-     *     path="/tasks/{id}",
+     *     path="/api/tasks/{id}",
      *     operationId="showTask",
      *     tags={"Tasks"},
      *     summary="Get a task by ID",
@@ -141,7 +141,7 @@ class TaskController extends Controller
 
     /**
      * @OA\Get(
-     *     path="/tasks",
+     *     path="/api/tasks",
      *     operationId="indexTasks",
      *     tags={"Tasks"},
      *     summary="Get tasks by project ID",
@@ -226,7 +226,7 @@ class TaskController extends Controller
 
     /**
      * @OA\Post(
-     *     path="/tasks",
+     *     path="/api/tasks",
      *     operationId="storeTask",
      *     tags={"Tasks"},
      *     summary="Create a new task",
@@ -364,7 +364,7 @@ class TaskController extends Controller
 
     /**
      * @OA\Delete(
-     *     path="/tasks/{id}",
+     *     path="/api/tasks/{id}",
      *     operationId="deleteTask",
      *     tags={"Tasks"},
      *     summary="Delete a task by ID",
@@ -434,7 +434,7 @@ class TaskController extends Controller
 
     /**
      * @OA\Put(
-     *     path="/tasks/{id}",
+     *     path="/api/tasks/{id}",
      *     operationId="updateTask",
      *     tags={"Tasks"},
      *     summary="Update a task by ID",
