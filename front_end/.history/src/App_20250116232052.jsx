@@ -7,7 +7,7 @@ import ProjectsDashboard from './components/project/projectDashboard.jsx';
 import ProjectDetails from './components/project/projectDetails.jsx';
 import NewProject from './components/project/newProject.jsx';
 import DashboardSidebar from './components/dashboardSidebar';
-import TaskModal from './components/task/tasksComponent.jsx'
+// Updated App.jsx
 function App() {
   return (
     <Router>
@@ -27,7 +27,6 @@ function App() {
                   <Route path="/projects" element={<ProjectsDashboard />} />
                   <Route path="/projects/new" element={<NewProject/>} />
                   <Route path="/projects/:projectId" element={<ProjectDetails />} />
-                  <Route path="/tasks" element={<TaskModal/>} />
                 </Routes>
               </div>
             </div>

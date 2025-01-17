@@ -78,6 +78,8 @@ const ProfileDropdown  = ({  onBackgroundChange ,onSettingsClick}) => {
                         />
                     </svg>
                 </div>
+
+                {/* Logout Item */}
                 <div
                     className="flex items-center justify-between p-2 cursor-pointer hover:bg-gray-100 rounded"
                     onClick={handleLogout}
@@ -98,6 +100,8 @@ const ProfileDropdown  = ({  onBackgroundChange ,onSettingsClick}) => {
                         />
                     </svg>
                 </div>
+
+                {/* Background Selection */}
                 <div className="mt-4">
                     <span className="text-gray-700 font-semibold">انتخاب پس‌زمینه</span>
                     <div className="grid grid-cols-3 gap-2 mt-2">
