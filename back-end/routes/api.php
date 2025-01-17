@@ -6,6 +6,7 @@ use App\Http\Controllers\Task\SubTaskController;
 use App\Http\Controllers\Task\TaskController;
 use App\Http\Controllers\Task\UserTaskController;
 use App\Http\Controllers\Team\TeamController;
+use App\Http\Controllers\Team\TeamMemberController;
 use App\Http\Controllers\Team\TeamUserController;
 use App\Http\Controllers\User\UserController;
 use App\Http\Controllers\User\UserProfileImageController;
@@ -30,6 +31,7 @@ Route::post('/users/{user_id}/teams', [TeamUserController::class, 'showUserTeams
 Route::delete('/teams/users', [TeamUserController::class, 'destroy']);
 
 Route::resource('teams', TeamController::class);
+Route::resource('/user/teams', TeamMemberController::class);
 Route::get('/user/tasks', [UserTaskController::class, 'index']);
 Route::post('/user/tasks', [UserTaskController::class, 'store']);
 Route::delete('/user/tasks', [UserTaskController::class, 'destroy']);

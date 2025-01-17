@@ -25,9 +25,9 @@ class TeamController extends Controller
     /**
      *
      * @OA\Get(
-     *     path="/api/api/teams",
-     *     summary="Get all teams",
-     *     description="Retrieve a list of all teams.",
+     *     path="/api/teams",
+     *     summary="Get teams that current user is admin of",
+     *     description="Retrieve a list of all teams that the user is admin of.",
      *     operationId="getTeams",
      *     tags={"Teams"},
      *     @OA\Response(
