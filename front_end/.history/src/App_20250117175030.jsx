@@ -24,7 +24,7 @@ function App() {
               </div>
               <div className="flex-grow p-4">
                 <Routes>
-                  <Route path="/" element={<Home />} />
+                  <Route path="/home" element={<Home />} />
                   <Route path="/projects" element={<ProjectsDashboard />} />
                   <Route path="/projects/new" element={<NewProject/>} />
                   <Route path="/projects/:projectId" element={<ProjectDetails />} />

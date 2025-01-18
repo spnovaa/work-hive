@@ -52,7 +52,8 @@ function DashboardSidebar() {
             />
         </svg>
     } 
-    label="داشبورد"     
+    label="داشبورد" 
+    onClick={() => console.log('Navigate to Dashboard')} 
 />
 <hr className="w-full border-gray-200 mt-2" />
             <SidebarItem 

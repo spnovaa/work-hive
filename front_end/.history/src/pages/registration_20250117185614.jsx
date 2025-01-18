@@ -3,9 +3,9 @@ import { useForm } from 'react-hook-form';
 import { registerUser } from '../api/auth';
 import Cookies from 'js-cookie';
 import logo from '../assets/logo.png';
-import { useNavigate } from 'react-router-dom';
+
 const Registration = () => {
-  const navigate = useNavigate();
+  //const navigate = useNavigate();
   const {
     register,
     handleSubmit,
