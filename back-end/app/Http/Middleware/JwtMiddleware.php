@@ -32,6 +32,6 @@ class JwtMiddleware
     private function isDoc($request)
     {
         $arr = explode('/', $request->url());
-        return count($arr) > 3 && $arr[3] == 'docs';
+        return count($arr) > 3 && ($arr[3] == 'docs' || strtolower($arr[3]) == 'storage');
     }
 }

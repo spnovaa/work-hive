@@ -92,7 +92,6 @@ class UserProfileImageController extends Controller
                 return response()->json($validator->errors()->toJson(), 400);
             }
 
-            // Find the user
             $user = User::find($userId);
             if (!$user) {
                 return response()->json([
@@ -101,20 +100,16 @@ class UserProfileImageController extends Controller
                 ], 404);
             }
 
-            // Handle the uploaded image
             if ($request->hasFile('profile_image')) {
                 $file = $request->file('profile_image');
                 $filename = time() . '_' . uniqid() . '.' . $file->getClientOriginalExtension();
 
-                // Store the image in the 'public/profile_images' directory
                 $file->storeAs('public/profile_images', $filename);
 
-                // Delete old profile image if exists
                 if ($user->U_ProfileImg && Storage::exists('public/profile_images/' . $user->U_ProfileImg)) {
                     Storage::delete('public/profile_images/' . $user->U_ProfileImg);
                 }
 
-                // Update the user's profile image filename in the database
                 $user->update([
                     'U_ProfileImg' => $filename
                 ]);
@@ -127,6 +122,7 @@ class UserProfileImageController extends Controller
             ], 200);
 
         } catch (\Throwable $throwable) {
+            dd($throwable);
             return response()->json([
                 'code' => 'error',
                 'message' => $throwable->getMessage()
