@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import ProfileImageModal from './profileImageModal'; // Import the modal component
+import ProfileImageModal from './ProfileImageModal'; // Import the modal component
 
 const ProfileDropdown = ({ onBackgroundChange, onSettingsClick, userId }) => {
   const [isOpen, setIsOpen] = useState(true);

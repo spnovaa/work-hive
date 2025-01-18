@@ -5,11 +5,12 @@ const ProfileImageModal = ({ onClose }) => {
   const [userId, setUserId] = useState(null);
   const [selectedImage, setSelectedImage] = useState(null);
 
+  // Fetch the user ID when the modal is displayed
   useEffect(() => {
     const fetchUserId = async () => {
       try {
-        const response = await axiosInstance.post('https://work-hive.liara.run/api/me');
-        setUserId(response.data.U_Id);
+        const response = await axiosInstance.post('https://work-hive.liara.run//api/me');
+        setUserId(response.data.U_Id); // Assuming `U_Id` contains the user ID
       } catch (error) {
         console.error('Error fetching user ID:', error.response?.data || error.message);
       }
@@ -35,7 +36,7 @@ const ProfileImageModal = ({ onClose }) => {
         formData.append('profile_image', selectedImage);
       }
 
-      const url = `https://work-hive.liara.run/api/users/${userId}/profile-image`;
+      const url = `https://work-hive.liara.run//api/users/${userId}/profile-image`;
       const response = await axiosInstance({
         method,
         url,

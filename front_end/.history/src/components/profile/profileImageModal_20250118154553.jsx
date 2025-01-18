@@ -1,29 +1,10 @@
-import React, { useState, useEffect } from 'react';
-import axiosInstance from '../../common/axiosInstance.js'; // Adjust the path as needed
+import React, { useState } from 'react';
+import axiosInstance from '../../common/axiosInstance.js';
 
-const ProfileImageModal = ({ onClose }) => {
-  const [userId, setUserId] = useState(null);
+const ProfileImageModal = ({ userId, onClose }) => {
   const [selectedImage, setSelectedImage] = useState(null);
 
-  useEffect(() => {
-    const fetchUserId = async () => {
-      try {
-        const response = await axiosInstance.post('https://work-hive.liara.run/api/me');
-        setUserId(response.data.U_Id);
-      } catch (error) {
-        console.error('Error fetching user ID:', error.response?.data || error.message);
-      }
-    };
-
-    fetchUserId();
-  }, []);
-
   const handleImageUpload = async (method) => {
-    if (!userId) {
-      alert('Failed to fetch user information. Please try again.');
-      return;
-    }
-
     if (!selectedImage && method !== 'delete') {
       alert('Please select an image!');
       return;
@@ -58,8 +39,7 @@ const ProfileImageModal = ({ onClose }) => {
       <div className="bg-white p-6 rounded shadow-lg w-full max-w-lg">
         <h3 className="text-lg font-semibold mb-4">Select Profile Image</h3>
         <div className="grid grid-cols-3 gap-4 mb-6">
-          {/* Replace with dynamic image paths */}
-          {['/assets/image1.jpg', '/assets/image2.jpg', '/assets/image3.jpg'].map((image, index) => (
+          {['../../assets/image1.jpg', '../../assets/image2.jpg', '../../assets/image3.jpg','../../assets/image4.jpg','../../assets/image5.jpg'].map((image, index) => (
             <img
               key={index}
               src={image}

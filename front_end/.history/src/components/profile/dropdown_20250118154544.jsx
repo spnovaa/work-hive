@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import ProfileImageModal from './profileImageModal'; // Import the modal component
+import axiosInstance from '../../common/axiosInstance.js'; 
+import ProfileImageModal from './profileImageModal'; 
 
 const ProfileDropdown = ({ onBackgroundChange, onSettingsClick, userId }) => {
   const [isOpen, setIsOpen] = useState(true);
-  const [selectedBackground, setSelectedBackground] = useState(null);
-  const [showImageModal, setShowImageModal] = useState(false); // State for image modal
+  const [showImageModal, setShowImageModal] = useState(false);
   const navigate = useNavigate();
 
   const handleLogout = () => {
@@ -20,48 +20,21 @@ const ProfileDropdown = ({ onBackgroundChange, onSettingsClick, userId }) => {
     setIsOpen(!isOpen);
   };
 
-  const handleBackgroundChange = (bg) => {
-    setSelectedBackground(bg);
-    onBackgroundChange(bg);
-    toggleDropdown();
-  };
-
   const handleProfileImageClick = () => {
-    setShowImageModal(true); // Open the profile image modal
+    setShowImageModal(true); 
   };
 
   const handleProfileImageClose = () => {
-    setShowImageModal(false); // Close the profile image modal
+    setShowImageModal(false); 
   };
-
-  const backgrounds = [
-    'bg-gradient-to-r from-yellow-400 via-red-400 to-pink-400',
-    'bg-blue-500',
-    'bg-red-300',
-    'bg-yellow-200',
-    'bg-indigo-200',
-    'bg-gray-900',
-    'bg-gradient-to-r from-gray-800 via-gray-700 to-gray-600',
-    'bg-gradient-to-r from-blue-800 to-blue-900',
-    'bg-gradient-to-r from-purple-900 via-purple-800 to-purple-700',
-    'bg-gradient-to-b from-black to-gray-800',
-    'bg-gray-700',
-    'bg-gradient-to-r from-green-400 via-teal-500 to-blue-500',
-    'bg-gradient-to-b from-orange-400 to-red-400',
-    'bg-pink-200',
-    'bg-purple-300',
-    'bg-teal-200',
-    'bg-gradient-to-l from-red-500 via-yellow-500 to-green-500',
-  ];
 
   return (
     <>
       {isOpen && (
         <div
           onClick={(e) => e.stopPropagation()}
-          className="absolute left-0 bg-white rounded-lg shadow-lg w-max p-4"
+          className="absolute top-0 left-0 bg-white rounded-lg shadow-lg w-max p-4"
         >
-          {/* Account Settings */}
           <div
             className="flex items-center justify-between p-2 cursor-pointer hover:bg-gray-100 rounded"
             onClick={() => {
@@ -85,8 +58,6 @@ const ProfileDropdown = ({ onBackgroundChange, onSettingsClick, userId }) => {
               />
             </svg>
           </div>
-
-          {/* Logout */}
           <div
             className="flex items-center justify-between p-2 cursor-pointer hover:bg-gray-100 rounded"
             onClick={handleLogout}
@@ -107,11 +78,9 @@ const ProfileDropdown = ({ onBackgroundChange, onSettingsClick, userId }) => {
               />
             </svg>
           </div>
-
-          {/* Profile Image */}
           <div
             className="flex items-center justify-between p-2 cursor-pointer hover:bg-gray-100 rounded"
-            onClick={handleProfileImageClick}
+            onClick={handleProfileImageClick} 
           >
             <span>تنظیم عکس پروفایل</span>
             <svg
@@ -129,28 +98,14 @@ const ProfileDropdown = ({ onBackgroundChange, onSettingsClick, userId }) => {
               />
             </svg>
           </div>
-
-          {/* Background Selection */}
-          <div className="mt-4">
-            <span className="text-gray-700 font-semibold">انتخاب پس‌زمینه</span>
-            <div className="grid grid-cols-3 gap-2 mt-2">
-              {backgrounds.map((bg, index) => (
-                <div
-                  key={index}
-                  className={`w-16 h-16 rounded-lg cursor-pointer ${bg} ${
-                    selectedBackground === bg ? 'ring-2 ring-blue-500' : ''
-                  }`}
-                  onClick={() => handleBackgroundChange(bg)}
-                ></div>
-              ))}
-            </div>
-          </div>
         </div>
       )}
 
-      {/* Profile Image Modal */}
       {showImageModal && (
-        <ProfileImageModal userId={userId} onClose={handleProfileImageClose} />
+        <ProfileImageModal
+          userId={userId}
+          onClose={handleProfileImageClose}
+        />
       )}
     </>
   );
