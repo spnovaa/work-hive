@@ -8,10 +8,9 @@ const TeamModal = ({ team, onClose }) => {
   useEffect(() => {
     const fetchTeamMembers = async () => {
       try {
-        console.log('mmd');
         console.log(`https://work-hive.liara.run/api/teams/users/${team.id}`);
-        const response = await axiosInstance.post(`https://work-hive.liara.run/api/teams/users/${team.id}`);
-        setTeamMembers(response.data.users);
+        const response = await axiosInstance.get(`https://work-hive.liara.run/api/teams/users/${team.id}`);
+        setTeamMembers(response.data);
       } catch (error) {
         console.error("Error fetching team members:", error);
       }

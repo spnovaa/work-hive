@@ -32,7 +32,6 @@ const TeamList = () => {
       
       setTeams((prevTeams) => [...prevTeams, response.data]);
       console.log(teams);
-      console.log(response.data);
       setNewTeamName('');
       setShowCreateTeamModal(false);
     } catch (error) {
@@ -43,23 +42,19 @@ const TeamList = () => {
   return (
     <div className="container mx-auto p-4">
       <div className="space-y-4">
-      {Array.isArray(teams) && teams.length > 0 ? (
-  teams.map((team) => (
-    <div
-      key={team?.id}
-      className="p-4 border rounded-lg shadow-md bg-white cursor-pointer space-y-2"
-      onClick={() => team?.team && handleTeamClick(team.team)}
-    >
-      <p className="text-xl font-bold">{team?.team?.name || "No Team Name Available"}</p>
-      <p className="text-sm text-gray-500">
-        {Array.isArray(team?.team?.users) ? team.team.users.length : 0} Members
-      </p>
-    </div>
-  ))
-) : (
-  <p className="text-gray-500 text-sm">No teams available.</p>
-)}
+      {teams.map((team) => (
+  <div
+    key={team.id}
+    className="p-4 border rounded-lg shadow-md bg-white cursor-pointer space-y-2"
+    onClick={() => handleTeamClick(team)}
+  >
+    <p className="text-xl font-bold">{team.name}</p>
 
+    <p className="text-sm text-gray-500">
+      {Array.isArray(team.users) ? team.users.length : 0} Members
+    </p>
+  </div>
+))}
 
 
       </div>
