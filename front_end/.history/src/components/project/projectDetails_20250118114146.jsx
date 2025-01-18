@@ -7,7 +7,6 @@ function ProjectScreen() {
   const [updateForm, setUpdateForm] = useState({ name: "", teamId: "" });
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-
   const [isUpdating, setIsUpdating] = useState(false);
 
   useEffect(() => {
@@ -19,8 +18,8 @@ function ProjectScreen() {
         );
         setProject(response.data);
         setUpdateForm({
-          name: response.data.project.name,
-          teamId: response.data.project.team.id,
+          name: response.data.name,
+          teamId: response.data.team.id,
         });
       } catch (error) {
         setError(error.response?.data?.message || error.message);

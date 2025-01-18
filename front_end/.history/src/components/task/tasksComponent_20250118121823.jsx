@@ -155,9 +155,12 @@ const TaskPage = () => {
     useEffect(() => {
       const fetchProjectsAndTasks = async () => {
         try {
+          // Fetch all projects
           const projectResponse = await axiosInstance.get('https://work-hive.liara.run/api/projects');
           const projectsData = projectResponse.data.projects;
           setProjects(projectsData);
+  
+          // Fetch tasks for each project
           const allTasks = [];
           for (const project of projectsData) {
             const taskResponse = await axiosInstance.get('https://work-hive.liara.run/api/tasks', {
@@ -166,7 +169,7 @@ const TaskPage = () => {
             allTasks.push(...taskResponse.data.tasks);
           }
   
-          setTasks(allTasks);
+          setTasks(allTasks); // Set all tasks in state
         } catch (error) {
           console.error('Error fetching projects or tasks:', error);
         }
@@ -185,12 +188,15 @@ const TaskPage = () => {
   
     return (
       <div className="container mx-auto p-6">
+        {/* New Task Button */}
         <button
           onClick={handleOpenModal}
           className="bg-green-500 text-white px-6 py-3 rounded-lg hover:bg-green-600 mb-6"
         >
           New Task
         </button>
+  
+        {/* Task List */}
         <div className="space-y-4">
           {tasks.map((task) => (
             <div
@@ -230,6 +236,8 @@ const TaskPage = () => {
             </div>
           ))}
         </div>
+  
+        {/* Task Modal */}
         <TaskModal show={modalOpen} onClose={handleCloseModal} projects={projects} />
       </div>
     );

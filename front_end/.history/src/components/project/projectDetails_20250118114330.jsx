@@ -7,7 +7,6 @@ function ProjectScreen() {
   const [updateForm, setUpdateForm] = useState({ name: "", teamId: "" });
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-
   const [isUpdating, setIsUpdating] = useState(false);
 
   useEffect(() => {

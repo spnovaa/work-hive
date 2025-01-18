@@ -1,26 +1,23 @@
 import React, { useState, useEffect } from "react";
 import axiosInstance from "../../common/axiosInstance"; 
-import { useParams } from 'react-router-dom';
-function ProjectScreen() {
-    const { projectId } = useParams();
+
+function ProjectScreen({ projectId, refreshProjects }) {
   const [project, setProject] = useState(null);
   const [updateForm, setUpdateForm] = useState({ name: "", teamId: "" });
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-
   const [isUpdating, setIsUpdating] = useState(false);
 
   useEffect(() => {
     async function fetchProjectDetails() {
       try {
-        console.log(projectId);
         const response = await axiosInstance.get(
           `https://work-hive.liara.run/api/projects/${projectId}`
         );
         setProject(response.data);
         setUpdateForm({
-          name: response.data.project.name,
-          teamId: response.data.project.team.id,
+          name: response.data.name,
+          teamId: response.data.team.id,
         });
       } catch (error) {
         setError(error.response?.data?.message || error.message);
@@ -34,9 +31,10 @@ function ProjectScreen() {
 
   const handleDelete = async () => {
     try {
-      const response = await axiosInstance.delete(`https://work-hive.liara.run/api/projects/${projectId}`);
+      const response = await axiosInstance.delete(`/api/projects/${projectId}`);
       if (response.status === 200) {
         alert(response.data.message);
+        refreshProjects(); // Refresh the project list or navigate away
       }
     } catch (error) {
       console.error("Error deleting project:", error);
@@ -48,11 +46,12 @@ function ProjectScreen() {
     setIsUpdating(true);
     try {
       const response = await axiosInstance.put(
-        `https://work-hive.liara.run/api/projects/${projectId}`,
+        `/api/projects/${projectId}`,
         updateForm
       );
       if (response.status === 204) {
         alert("Project updated successfully.");
+        refreshProjects(); // Refresh the project list to reflect changes
       }
     } catch (error) {
       console.error("Error updating project:", error);
@@ -77,10 +76,10 @@ function ProjectScreen() {
       {/* Project Card */}
       <div className="bg-white shadow-lg rounded-lg overflow-hidden">
         <div className="h-64 bg-gray-200 flex justify-center items-center">
-          {project.project.img ? (
+          {project.img ? (
             <img
-              src={project.project.img}
-              alt={project.project.name}
+              src={project.img}
+              alt={project.name}
               className="object-cover h-full w-full"
             />
           ) : (
@@ -89,12 +88,15 @@ function ProjectScreen() {
         </div>
 
         <div className="p-6">
-          <h2 className="text-2xl font-bold mb-4">{project.project.name}</h2>
+          {/* Project Info */}
+          <h2 className="text-2xl font-bold mb-4">{project.name}</h2>
 
           <div className="bg-gray-100 p-4 rounded-lg mb-4">
-            <h3 className="text-lg font-semibold mb-2">Team: {project.project.team.name}</h3>
-            <p className="text-sm text-gray-600 mb-2">Team ID: {project.project.team.id}</p>
+            <h3 className="text-lg font-semibold mb-2">Team: {project.team.name}</h3>
+            <p className="text-sm text-gray-600 mb-2">Team ID: {project.team.id}</p>
           </div>
+
+          {/* Update Form */}
           <div className="mb-4">
             <h3 className="text-lg font-semibold mb-2">Update Project</h3>
             <input
@@ -114,6 +116,8 @@ function ProjectScreen() {
               placeholder="Team ID"
             />
           </div>
+
+          {/* Actions */}
           <div className="flex justify-between">
             <button
               className="px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700"
