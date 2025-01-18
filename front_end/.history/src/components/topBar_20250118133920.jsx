@@ -3,6 +3,7 @@ import React from 'react';
 function TopBar({ toggleSidebar }) {
   return (
     <div className="flex items-center justify-between p-4">
+      {/* Right-aligned Toggle Button */}
       <div className="flex items-center">
         <button
           onClick={toggleSidebar}
@@ -23,6 +24,7 @@ function TopBar({ toggleSidebar }) {
             />
           </svg>
         </button>
+        {/* Bold Text */}
         <div className="text-white text-lg font-bold">میزیتو</div>
       </div>
     </div>

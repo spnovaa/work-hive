@@ -48,11 +48,11 @@ const TeamList = () => {
     <div
       key={team?.id}
       className="p-4 border rounded-lg shadow-md bg-white cursor-pointer space-y-2"
-      onClick={() => team && handleTeamClick(team)}
+      onClick={() => team?.team && handleTeamClick(team.team)}
     >
-      <p className="text-xl font-bold">{team?.name || "No Team Name Available"}</p>
+      <p className="text-xl font-bold">{team?.team?.name || "No Team Name Available"}</p>
       <p className="text-sm text-gray-500">
-        {Array.isArray(team?.users) ? team.users.length : 0} Members
+        {Array.isArray(team?.team?.users) ? team.team.users.length : 0} Members
       </p>
     </div>
   ))

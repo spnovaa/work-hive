@@ -52,13 +52,13 @@ const ProfileDropdown  = ({  onBackgroundChange ,onSettingsClick}) => {
         {isOpen && (
             <div
                 onClick={(e) => e.stopPropagation()} // Prevent propagation of the click event
-                className="absolute  left-0 bg-white rounded-lg shadow-lg w-max p-4"
+                className="absolute top-0 left-0 bg-white rounded-lg shadow-lg w-max p-4"
             >
                 <div
                     className="flex items-center justify-between p-2 cursor-pointer hover:bg-gray-100 rounded"
                     onClick={() => {
                         onSettingsClick();
-                        toggleDropdown();  // Close the dropdown
+                        toggleDropdown();  
                     }}
                 >
                     <span>تنظیمات حساب کاربری</span>

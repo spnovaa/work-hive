@@ -4,16 +4,14 @@ import axiosInstance from '../../common/axiosInstance.js';
 const ProfileSettingsModal = ({ show, onClose }) => {
   const [userInfo, setUserInfo] = useState({ name: '', lastName: '', email: '' });
   const [userId, setUserId] = useState(null);
+
+  // Fetch user information when the modal is displayed
   useEffect(() => {
     if (show) {
       const fetchUserInfo = async () => {
         try {
-          const response = await axiosInstance.post('https://work-hive.liara.run/api/me');
-          const name = response.data.U_Name;
-          const lastName = response.data.U_LastName;
-          const email = response.data.U_Email;
-          const U_Id = response.data.U_Id;
-          console.log({ name, lastName, email });
+          const response = await axiosInstance.post('/api/me');
+          const { U_Id, name, lastName, email } = response.data;
           setUserId(U_Id);
           setUserInfo({ name, lastName, email });
         } catch (error) {
@@ -24,9 +22,11 @@ const ProfileSettingsModal = ({ show, onClose }) => {
       fetchUserInfo();
     }
   }, [show]);
+
+  // Submit updated user details
   const handleSubmit = async () => {
     try {
-      const response = await axiosInstance.put(`https://work-hive.liara.run/api/users/${userId}`, {
+      const response = await axiosInstance.put(`/api/users/${userId}`, {
         name: userInfo.name,
         lastName: userInfo.lastName,
         email: userInfo.email,
@@ -45,7 +45,10 @@ const ProfileSettingsModal = ({ show, onClose }) => {
 
   return (
     <>
+      {/* Background Overlay */}
       <div className="fixed inset-0 bg-black opacity-30 z-40" onClick={onClose}></div>
+
+      {/* Modal Content */}
       <div className="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-white p-8 shadow-lg rounded-lg z-50 w-full max-w-sm">
         <h2 className="text-xl font-semibold mb-4">Edit Profile</h2>
 

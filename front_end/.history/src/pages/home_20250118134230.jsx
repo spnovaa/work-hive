@@ -24,8 +24,8 @@ function Home() {
     return new Date().toLocaleDateString('fa-IR', options); 
   };
   return (
-    <div className={`h-screen ${background} `}>
-      <div className="absolute top-20 left-8">
+    <div className={`h-screen ${background} p-4`}>
+      <div className="absolute top-20 left-4">
         <ProfileSection
           name={name}
           greeting="ظهر بخیر"

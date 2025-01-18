@@ -95,22 +95,22 @@ function DashboardSidebar() {
             />
               <hr className="w-full border-gray-200 mt-2" />
             <SidebarItem 
-               icon={
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  className="h-9 w-9 text-purple-500"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth="2"
-                    d="M8 6h12M8 10h12m-12 4h12M4 6h.01M4 10h.01M4 14h.01M4 18h16"
-                  />
-                </svg>
-              }
+                icon={
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      className="h-6 w-6 text-purple-500"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth="2"
+                        d="M5 13l4 4L19 7M8 7h8M8 11h8m-8 4h6"
+                      />
+                    </svg>
+                  }
                 label="وظایف" 
                 onClick={() => handleNavigation('/tasks')} 
             />
@@ -119,7 +119,7 @@ function DashboardSidebar() {
            icon={
             <svg
               xmlns="http://www.w3.org/2000/svg"
-              className="h-9 w-9 text-green-500"
+              className="h-6 w-6 text-green-500"
               fill="none"
               viewBox="0 0 24 24"
               stroke="currentColor"

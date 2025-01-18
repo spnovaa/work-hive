@@ -23,14 +23,14 @@ const ProfileSection = ({ name, greeting, date, onBackgroundChange ,onSettingsCl
   }, []);
 
   return (
-    <div className="relative top-20">
+    <div className="relative">
   <div
     className={`relative z-0 p-4 bg-gradient-to-r from-blue-100 to-blue-200 rounded-lg shadow-md max-w-xs cursor-pointer ${
       isDropdownOpen ? 'hidden' : ''
     }`}
     onClick={toggleDropdown}
   >
-    <div className="flex flex-col items-center ">
+    <div className="flex flex-col items-center top-20">
       <div className="bg-gray-300 w-24 h-24 rounded-full flex items-center justify-center mb-4">
         <svg
           xmlns="http://www.w3.org/2000/svg"

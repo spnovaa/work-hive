@@ -48,17 +48,16 @@ const ProfileDropdown  = ({  onBackgroundChange ,onSettingsClick}) => {
 
   return (
     <>
-        {/* Conditionally render the dropdown div only when isOpen is true */}
         {isOpen && (
             <div
-                onClick={(e) => e.stopPropagation()} // Prevent propagation of the click event
-                className="absolute  left-0 bg-white rounded-lg shadow-lg w-max p-4"
+                onClick={(e) => e.stopPropagation()} 
+                className="absolute top-40 left-8 bg-white rounded-lg shadow-lg w-max p-4"
             >
                 <div
                     className="flex items-center justify-between p-2 cursor-pointer hover:bg-gray-100 rounded"
                     onClick={() => {
                         onSettingsClick();
-                        toggleDropdown();  // Close the dropdown
+                        toggleDropdown();  
                     }}
                 >
                     <span>تنظیمات حساب کاربری</span>

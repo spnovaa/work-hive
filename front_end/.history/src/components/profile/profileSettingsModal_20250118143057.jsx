@@ -9,11 +9,7 @@ const ProfileSettingsModal = ({ show, onClose }) => {
       const fetchUserInfo = async () => {
         try {
           const response = await axiosInstance.post('https://work-hive.liara.run/api/me');
-          const name = response.data.U_Name;
-          const lastName = response.data.U_LastName;
-          const email = response.data.U_Email;
-          const U_Id = response.data.U_Id;
-          console.log({ name, lastName, email });
+          const { U_Id, name, lastName, email } = response.data;
           setUserId(U_Id);
           setUserInfo({ name, lastName, email });
         } catch (error) {

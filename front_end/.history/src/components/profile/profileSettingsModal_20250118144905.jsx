@@ -28,7 +28,7 @@ const ProfileSettingsModal = ({ show, onClose }) => {
     try {
       const response = await axiosInstance.put(`https://work-hive.liara.run/api/users/${userId}`, {
         name: userInfo.name,
-        lastName: userInfo.lastName,
+        LastName: userInfo.lastName,
         email: userInfo.email,
       });
       if (response.status === 204) {

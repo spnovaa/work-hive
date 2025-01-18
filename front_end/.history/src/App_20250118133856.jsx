@@ -21,16 +21,20 @@ function App() {
   return (
     <Router>
       <div className="flex flex-col h-screen">
+        {/* Top Bar */}
         <div className="w-full bg-red-600 shadow-md fixed top-0 z-20">
           <TopBar toggleSidebar={toggleSidebar} />
         </div>
 
         <div className="flex flex-grow">
+          {/* Sidebar */}
           {sidebarVisible && (
             <div className="w-64 bg-gray-800 fixed top-16 bottom-0 right-0 z-10 shadow-md">
               <DashboardSidebar />
             </div>
           )}
+
+          {/* Main Content */}
           <div
             className={`flex-grow ${
               sidebarVisible ? 'pr-64' : ''

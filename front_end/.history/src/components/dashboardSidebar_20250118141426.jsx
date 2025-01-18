@@ -95,10 +95,31 @@ function DashboardSidebar() {
             />
               <hr className="w-full border-gray-200 mt-2" />
             <SidebarItem 
-               icon={
+                icon={
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      className="h-6 w-6 text-purple-500"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth="2"
+                        d="M5 13l4 4L19 7M8 7h8M8 11h8m-8 4h6"
+                      />
+                    </svg>
+                  }
+                label="وظایف" 
+                onClick={() => handleNavigation('/tasks')} 
+            />
+              <hr className="w-full border-gray-200 mt-2" />
+            <SidebarItem 
+             icon={
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
-                  className="h-9 w-9 text-purple-500"
+                  className="h-6 w-6 text-green-500"
                   fill="none"
                   viewBox="0 0 24 24"
                   stroke="currentColor"
@@ -107,31 +128,10 @@ function DashboardSidebar() {
                     strokeLinecap="round"
                     strokeLinejoin="round"
                     strokeWidth="2"
-                    d="M8 6h12M8 10h12m-12 4h12M4 6h.01M4 10h.01M4 14h.01M4 18h16"
+                    d="M17 20h5V9a2 2 0 00-2-2H4a2 2 0 00-2 2v11h5m10-9a3 3 0 11-6 0 3 3 0 016 0zm-6 2a6 6 0 00-12 0v5h12v-5z"
                   />
                 </svg>
               }
-                label="وظایف" 
-                onClick={() => handleNavigation('/tasks')} 
-            />
-              <hr className="w-full border-gray-200 mt-2" />
-            <SidebarItem 
-           icon={
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              className="h-9 w-9 text-green-500"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="2"
-                d="M5.121 17.804A4 4 0 119.88 17.804M15 11a4 4 0 11-8 0 4 4 0 018 0zm-5 4h6M12 17a6 6 0 016-6"
-              />
-            </svg>
-          }
                 label="تیم ها" 
                 onClick={() => handleNavigation('/teams')} 
             />
