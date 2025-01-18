@@ -24,7 +24,7 @@ class JwtMiddleware
     {
         return in_array($request->url(), [
             env('APP_URL') . '/api/register',
-            env('APP_URL') ,
+            env('APP_URL'),
             env('APP_URL') . '/api/login',
         ]);
     }
@@ -32,6 +32,6 @@ class JwtMiddleware
     private function isDoc($request)
     {
         $arr = explode('/', $request->url());
-        return count($arr) > 3 && ($arr[3] == 'docs' || strtolower($arr[3]) == 'storage');
+        return count($arr) > 3 && (in_array($arr[3], ['docs', 'storage', 'public', 'profile_images']));
     }
 }
