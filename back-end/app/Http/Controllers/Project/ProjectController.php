@@ -347,12 +347,13 @@ class ProjectController extends Controller
                 return response()->json($validator->errors()->toJson(), 400);
             }
 
-            $project = Project::where('P_Id', $id)
+            Project::where('P_Id', $id)
                 ->update([
                     'P_Name' => $request->get('name'),
                     'P_TeamId' => $request->get('teamId')
                 ]);
-
+            
+            $project = Project::find($id);
             return response()->json([
                 'project' => new ProjectShowResource($project)
             ], 204);
