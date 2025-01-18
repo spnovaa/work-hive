@@ -28,7 +28,7 @@ function DashboardSidebar() {
     };
 
     return (
-        <div className="w-64 bg-gray-100 text-white shadow-md p-4"> 
+        <div className="w-64 bg-gray-800 text-white shadow-md p-4"> {/* Changed bg-gray-200 to bg-gray-800 */}
             <SidebarItem 
                 icon={
                     <svg

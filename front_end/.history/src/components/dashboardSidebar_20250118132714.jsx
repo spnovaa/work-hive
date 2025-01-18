@@ -1,25 +1,3 @@
-import React from 'react';
-import { useNavigate } from 'react-router-dom';
-
-function SidebarItem({ icon, label, notificationCount, onClick }) {
-    return (
-        <div 
-            className="className=flex items-center justify-start flex-row-reverse p-4 cursor-pointer hover:bg-gray-100"
-            onClick={onClick}
-        >
-            <div className="flex items-center">
-                <span className="text-lg text-gray-700 mr-2">{icon}</span>
-                <span className="text-gray-700 text-sm font-medium">{label}</span>
-            </div>
-            {notificationCount > 0 && (
-                <span className="bg-red-500 text-white text-xs font-bold rounded-full px-2 py-1">
-                    {notificationCount}
-                </span>
-            )}
-        </div>
-    );
-}
-
 function DashboardSidebar() {
     const navigate = useNavigate();
 
@@ -28,7 +6,7 @@ function DashboardSidebar() {
     };
 
     return (
-        <div className="w-64 bg-gray-100 text-white shadow-md p-4"> 
+        <div className="w-64 bg-gray-800 text-white shadow-md p-4"> {/* Changed bg-gray-200 to bg-gray-800 */}
             <SidebarItem 
                 icon={
                     <svg
@@ -91,4 +69,3 @@ function DashboardSidebar() {
 }
 
 export default DashboardSidebar;
-

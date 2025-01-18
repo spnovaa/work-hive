@@ -28,7 +28,7 @@ function DashboardSidebar() {
     };
 
     return (
-        <div className="w-64 bg-gray-100 text-white shadow-md p-4"> 
+        <div className="w-64 bg-white shadow-md p-4">
             <SidebarItem 
                 icon={
                     <svg
@@ -53,7 +53,7 @@ function DashboardSidebar() {
                     </svg>
                 } 
                 label="داشبورد"
-                onClick={() => handleNavigation('/')}
+                onClick={() => handleNavigation('/')} // Navigate to "/"
             />
             <hr className="w-full border-gray-200 mt-2" />
             <SidebarItem 
