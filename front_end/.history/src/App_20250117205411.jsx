@@ -15,22 +15,25 @@ function App() {
       <Routes>
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Registration />} />
+
         <Route
           path="*"
           element={
             <div className="flex h-screen">
-              <div className="absolute top-4 right-4 w-64 bg-gray-100">
+              {/* Sidebar: Fixed on the left side */}
+              <div className="w-64 bg-gray-100 fixed left-0 top-0 bottom-0 z-10">
                 <DashboardSidebar />
               </div>
-              <div className="flex-grow p-4">
+
+              {/* Main content area: Respects sidebar width */}
+              <div className="flex-grow ml-64 p-4">
                 <Routes>
                   <Route path="/" element={<Home />} />
                   <Route path="/projects" element={<ProjectsDashboard />} />
-                  <Route path="/projects/new" element={<NewProject/>} />
+                  <Route path="/projects/new" element={<NewProject />} />
                   <Route path="/projects/:projectId" element={<ProjectDetails />} />
-                  <Route path="/tasks" element={<TaskModal/>} />
-                  <Route path="/teams" element={<TeamList/>} />
-
+                  <Route path="/tasks" element={<TaskModal />} />
+                  <Route path="/teams" element={<TeamList />} />
                 </Routes>
               </div>
             </div>
