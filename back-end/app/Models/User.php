@@ -72,7 +72,7 @@ class User extends Authenticatable implements JWTSubject
      */
     public function admin_of_teams(): HasMany
     {
-        return $this->hasMany(Team::class, 'T_AdminId', 'T_Id');
+        return $this->hasMany(Team::class, 'T_AdminId', 'U_Id');
     }
 
 }
